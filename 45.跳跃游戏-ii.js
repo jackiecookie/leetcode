@@ -33,8 +33,8 @@ var jump = function (nums) {
           nextStep = len;
         }
         let canReachEnd = i + currentStep >= len - 1;
-        if (currentStep+i >= maxStep || canReachEnd) {
-          maxStep = currentStep+i;
+        if (currentStep + i >= maxStep || canReachEnd) {
+          maxStep = currentStep + i;
           maxStepIndex = i;
           if (canReachEnd) {
             break;

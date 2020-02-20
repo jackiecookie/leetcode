@@ -1,27 +1,34 @@
-var maxSubArray = function(nums) {
-    
-    let len = nums.length;
-    if(len==0){
-        return 0;
+/**
+ * @param {number[]} gas
+ * @param {number[]} cost
+ * @return {number}
+ */
+var canCompleteCircuit = function (gas, cost) {
+    let costGap = [];
+
+    for (let i = 0; i < gas.length; i++) {
+        costGap.push(gas[i] - cost[i]);
     }
-    let currentSum = nums[0];
-    let max = currentSum;
-    for(let i=0,j=1;j<len;){
-        if(currentSum<0){
-            i=j;
-            j=i+1;
-            currentSum = nums[i];
-        }else{
-            currentSum+=nums[j];
-            j++
+
+    let remain = 0;
+    let startRemain = 0;
+    let res = -1;
+    for (let i = 0; i < costGap.length; i++) {
+        let gap = costGap[i];
+        if (gap >= 0) {
+            if (startRemain <= 0) {
+                res = i;
+                startRemain = 0;
+            }
+
+
         }
-        if(currentSum>max){
-            max = currentSum;
-        }
+        startRemain += gap;
+        remain += gap;
     }
-    
-    return max;
+
+    return remain >= 0 ? res : -1;
 };
 
 
-maxSubArray( [1])
+canCompleteCircuit([2],[2])
